@@ -10,7 +10,7 @@ Also, for those who don't have any knowledge of Express in NodeJs, you will defi
 
 
 # Starting A Server
-Starting a go server is very simple to do; simply navigate to the project folder you want to use (say **cd onlyrouting**) and then run **go run main.go** to start up your **Go** server. This is simple but has a downside, that every time you make a sigle change you need re-run **go run main.go** command again! 
+Starting a **Go** server is very simple to do; simply navigate to the project folder you want to use (say **cd onlyrouting**) and then run **go run main.go** to start up your **Go** server. This is simple but has a downside, that every time you make a sigle change you need re-run **go run main.go** command again in order to test your app effectively with the latest changes! 
 It would be really cool if our server could automatically restart itself whenever it detects one or more saved changes of our project; just like using **Nodemon** with **Express** in a **NodeJs** app.
 
 To handle this issue, every Go-JJC project/module/package uses a package called **reflex (https://github.com/cespare/reflex)** which would automatically restart our server whenever we save our code(s), thus leaving us to focus more on the things that matter the most than manually and painstakingly restarting a server over and over again.
