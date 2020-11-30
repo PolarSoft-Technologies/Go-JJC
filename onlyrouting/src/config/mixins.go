@@ -11,10 +11,10 @@ import (
 
 //Config func to get env value from key
 func Config(key string) string {
-	// load .env file
-	err := godotenv.Load(".env")
+	// load onlyrouting.env file
+	err := godotenv.Load("onlyrouting.env")
 	if err != nil {
-		fmt.Print("Error loading .env file")
+		fmt.Print("Error loading onlyrouting.env file")
 	}
 	return os.Getenv(key)
 
@@ -30,19 +30,4 @@ func GetAPIBase() string {
 
 	return Config("API_KEYWORD")
 
-}
-
-/** AppMode: used for switching between modes supported in
-*** this project
-**/
-func AppMode() string {
-	/**create an array of modes that are supported in this project
-	*** the current mode determines the routes and packages
-	*** that would be used
-	**/
-	modes := [20]string{"onlyrouting", "with_mysql",
-		"with_mongodb", "with_mariadb", "with_firebase",
-		"with_graphql", "with_redis", "with_firebase"}
-
-	return modes[0] //return the current working mode. i.e onlyrouting
 }

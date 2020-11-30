@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// entry point to our program
+// entry point to this program
 func main() {
 
 	// call the New() method - used to instantiate a new Fiber App
@@ -19,7 +19,7 @@ func main() {
 	//setup app wide routes
 	router.SetupRoutes(app)
 
-	// start app and listen on port specified in the .env file
+	// start app and listen on port specified in the onlyrouting.env file
 	err := app.Listen(":" + config.Config("SERVER_PORT"))
 	if err != nil {
 		panic(err)

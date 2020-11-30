@@ -1,4 +1,4 @@
-package onlyrouting //declare package name here
+package controllers //declare package name here
 
 /** This package is used for handling/controlling product related requests **/
 
