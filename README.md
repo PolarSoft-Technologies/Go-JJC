@@ -1,5 +1,5 @@
 # Go-JJC
-A boilerplate for **Go** projects, which covers the basics of setting up a server with **Golang**. This repo covers server routing in a more professional way as well as database setup/connections for **MongoDB, MySQL, MariaDB, GraphQL, FireBase** etc. and **WebSocket** using **Golang**. This project is free to use and maintained by PolarSoft Technologies. Support from like-minded Go developers and correctional help is highly appreciated.
+A boilerplate for **Go** projects, which covers the basics of setting up a server with **Golang**. This repo covers server routing in a more professional way as well as how to serve/render static web pages and database setup/connections for **MongoDB, MySQL, MariaDB, GraphQL, FireBase** etc. and **WebSocket** using **Golang**. This project is free to use and maintained by PolarSoft Technologies. Support from like-minded Go developers and correctional help is highly appreciated.
 
 **NOTE:**
 This project uses **<a href="https://docs.gofiber.io/">Fiber</a>** which is an **Express** inspired web framework built on top of Fasthttp, the fastest HTTP engine for Go. Designed to ease things up for fast development with zero memory allocation and performance in mind.
