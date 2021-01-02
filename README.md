@@ -1,3 +1,5 @@
+<img src="https://repository-images.githubusercontent.com/316869493/7503e080-4c38-11eb-8ae1-7a32ac35a9ce">
+
 # Go-JJC
 A boilerplate for **Go** projects, which covers the basics of setting up a server with **Golang**. This repo covers server routing in a more professional way as well as how to serve/render static web pages and database setup/connections for **MongoDB, MySQL, MariaDB, GraphQL, FireBase** etc. and **WebSocket** using **Golang**. This project is free to use and maintained by PolarSoft Technologies. Support from like-minded Go developers and correctional help is highly appreciated.
 
@@ -16,6 +18,8 @@ It would be really cool if our server could automatically restart itself wheneve
 To handle this issue, every Go-JJC project/module/package uses a package called **<a href="https://github.com/cespare/reflex">Reflex</a>** which would automatically restart our server whenever we save our code(s), thus leaving us to focus more on the things that matter the most than manually and painstakingly restarting a server over and over again.
 Thus to start a server, we would do this **reflex -r '\.go' -s -- sh -c "go run main.go"** instead of **go run main.go** in the current working directory.
 Doing this would automatically restart our server whenever we save changes in our code! 
+
+
 Do well to read about this package here **<a href="https://github.com/cespare/reflex">Reflex</a>**
 
 # Available Modules
