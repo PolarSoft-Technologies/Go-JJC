@@ -1,5 +1,5 @@
 # Go-JJC
-A boilerplate for **Go** projects, which covers the basics of setting up a server with **Golang**. This repo covers server routing in a more professional way as well as database setup/connections for **MongoDB, MySQL, MariaDB, GraphQL, FireBase** etc. This project is free to use and maintained by PolarSoft Technologies. Support from like-minded Go developers and correctional help is highly appreciated.
+A boilerplate for **Go** projects, which covers the basics of setting up a server with **Golang**. This repo covers server routing in a more professional way as well as database setup/connections for **MongoDB, MySQL, MariaDB, GraphQL, FireBase** etc. and **WebSocket** using **Golang**. This project is free to use and maintained by PolarSoft Technologies. Support from like-minded Go developers and correctional help is highly appreciated.
 
 **NOTE:**
 This project uses **<a href="https://docs.gofiber.io/">Fiber</a>** which is an **Express** inspired web framework built on top of Fasthttp, the fastest HTTP engine for Go. Designed to ease things up for fast development with zero memory allocation and performance in mind.
@@ -17,3 +17,9 @@ To handle this issue, every Go-JJC project/module/package uses a package called 
 Thus to start a server, we would do this **reflex -r '\.go' -s -- sh -c "go run main.go"** instead of **go run main.go** in the current working directory.
 Doing this would automatically restart our server whenever we save changes in our code! 
 Do well to read about this package here **https://github.com/cespare/reflex**
+
+# Available Modules
+Go-JJC comes with different directories/folders called a modules/packages. Each module/package does or accomplishes a predefined task.
+These modules singly are explained below:
+
+## Only Routing (the onlyrouting folder) Module
