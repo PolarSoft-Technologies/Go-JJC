@@ -19,7 +19,23 @@ Doing this would automatically restart our server whenever we save changes in ou
 Do well to read about this package here **https://github.com/cespare/reflex**
 
 # Available Modules
-Go-JJC comes with different directories/folders called a modules/packages. Each module/package does or accomplishes a predefined task.
-These modules singly are explained below:
+Go-JJC comes with different directories/folders called modules/packages. Each module/package does or accomplishes a predefined task. The different modules are singly explained below with each file in each module fully documented for better understanding of what's been done:
 
-## Only Routing (the onlyrouting folder) Module
+## 1. Only Routing (the onlyrouting folder) Module
+This module explains the basics of api routing using **Golang** in a more professional way. The entry point of this module is the main.go file; it's in this file we setup our **Fiber** instance/app, configure middlewares, and app/project-wide routes.
+
+There are two controller (product_controller.go & user_controller.go) files in this module which handle user and product related operations.
+
+There are three routes in the product_controller.go file which are
+**localhost:3330/api/v1/products/add , localhost:3330/api/v1/products/update , and localhost:3330/api/v1/products/fetchAll**. You can test out these routes in Postman or web browser to see their individual response.
+
+The user_controller.go file also has three routes. In this file, more light is being thrown on how to retrieve params, query strings and body data sent by the client. The following are the routes to watch out for in this controller:
+**localhost:3330/api/v1/user/signIn?email=test@test.com&password=123456** for sending data from the client as query strings/parameters,
+
+**localhost:3330/api/v1/user/signIn/:email/:password** for sending data from the client as parameters, and
+
+**localhost:3330/api/v1/user/signIn** for sending data from the client using the body object. 
+
+Refer to the user_controller.go file for more explanation on these!
+
+## 2. With Web Pages (the with_web_pages folder) Module
