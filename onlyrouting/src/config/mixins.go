@@ -9,7 +9,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-//Config func to get env value from key
+//Config func to get env value based on it's key/name prop
 func Config(key string) string {
 	// load onlyrouting.env file
 	err := godotenv.Load("onlyrouting.env")
