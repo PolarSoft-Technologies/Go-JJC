@@ -13,10 +13,10 @@ Also, for those who don't have any knowledge of Express in NodeJs, you will defi
 Starting a **Go** server is very simple to do; simply navigate to the project folder you want to use (say **cd onlyrouting**) and then run **go run main.go** to start up your **Go** server. This is simple but has a downside, that every time you make a sigle change you need re-run **go run main.go** command again in order to test your app effectively with the latest changes! 
 It would be really cool if our server could automatically restart itself whenever it detects one or more saved changes of our project; just like using **Nodemon** with **Express** in a **NodeJs** app.
 
-To handle this issue, every Go-JJC project/module/package uses a package called **reflex (https://github.com/cespare/reflex)** which would automatically restart our server whenever we save our code(s), thus leaving us to focus more on the things that matter the most than manually and painstakingly restarting a server over and over again.
+To handle this issue, every Go-JJC project/module/package uses a package called **<a href="https://github.com/cespare/reflex">Reflex</a>** which would automatically restart our server whenever we save our code(s), thus leaving us to focus more on the things that matter the most than manually and painstakingly restarting a server over and over again.
 Thus to start a server, we would do this **reflex -r '\.go' -s -- sh -c "go run main.go"** instead of **go run main.go** in the current working directory.
 Doing this would automatically restart our server whenever we save changes in our code! 
-Do well to read about this package here **https://github.com/cespare/reflex**
+Do well to read about this package here **<a href="https://github.com/cespare/reflex">Reflex</a>**
 
 # Available Modules
 Go-JJC comes with different directories/folders called modules/packages. Each module/package does or accomplishes a predefined task. The different modules are singly explained below with each file in each module fully documented for better understanding of what's been done:
@@ -39,4 +39,4 @@ The user_controller.go file also has three routes. In this file, more light is b
 Refer to the user_controller.go file for more explanation on these!
 
 ## 2. With Web Pages (the with_web_pages folder) Module
-This module explains how to serve/render web pages with **Go**
+This module explains how to serve/render web pages with **Go**. This module is very straightforward and easy to understand.
