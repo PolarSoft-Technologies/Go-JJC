@@ -40,3 +40,9 @@ Refer to the user_controller.go file for more explanation on these!
 
 ## 2. With Web Pages (the with_web_pages folder) Module
 This module explains how to serve/render web pages with **Go**. This module is very straightforward and easy to understand.
+
+
+# Need More Features?
+If you think this repo (or you) needs more feature(s) please kindly create an issue on this repo; we'll go through it and revert to you once it's been implemented. Thanks.
+
+**Enjoy!**
