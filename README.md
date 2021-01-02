@@ -39,3 +39,4 @@ The user_controller.go file also has three routes. In this file, more light is b
 Refer to the user_controller.go file for more explanation on these!
 
 ## 2. With Web Pages (the with_web_pages folder) Module
+This module explains how to serve/render web pages with **Go**
