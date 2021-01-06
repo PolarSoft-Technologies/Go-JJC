@@ -22,6 +22,8 @@ Doing this would automatically restart our server whenever we save changes in ou
 
 Do well to read about this package here **<a href="https://github.com/cespare/reflex">Reflex</a>**
 
+**NOTE: comments are heavily used in this project; doing so ensures proper understanding for beginners. If you feel you don't need them simply get rid of the ones you don't need!**
+
 # Available Modules
 Go-JJC comes with different directories/folders called modules/packages. Each module/package does or accomplishes a predefined task. The different modules are singly explained below with each file in each module fully documented for better understanding of what's been done:
 

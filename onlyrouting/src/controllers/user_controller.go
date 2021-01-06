@@ -30,7 +30,7 @@ type BodyData struct {
 //UserController for user related operations
 func UserController(app *fiber.App) {//receiving the fiber object passed as app
 
-	//handle sign-in operations here. Uses the Post HTTP method
+	//handle sign-in operations here. Uses the POST HTTP method
 	app.Post(config.GetAPIBase()+"user/signIn",
 		func(c *fiber.Ctx) error {
 			/** The Fiber context c contains the HTTP request and response.
@@ -42,7 +42,7 @@ func UserController(app *fiber.App) {//receiving the fiber object passed as app
 
 			/** 1. Retrieving a query string value in the request
 			*** Suppose our endpoint on the client side is
-			*** "user/signIn?email=test@test.com&password=123456";
+			*** "{{BASE_API_URL}}/user/signIn?email=test@test.com&password=123456";
 			*** we retrieve the query string values of email and password
 			*** from the Query function of the Fiber context, which takes the
 			*** name of the query string as a parameter
@@ -51,9 +51,9 @@ func UserController(app *fiber.App) {//receiving the fiber object passed as app
 			passwordQueryString := c.Query("password")
 
 			/** 2. Retrieving a parameter value in the request
-			*** Suppose our endpoint is "user/signIn/:email/:password",
+			*** Suppose our endpoint is "{{BASE_API_URL}}/user/signIn/:email/:password",
 			*** i.e on the client side we have
-			*** "user/signIn/test@test.com/123456";
+			*** "{{BASE_API_URL}}/user/signIn/test@test.com/123456";
 			*** we retrieve the parameters, email and password, from
 			*** the Params function of the Fiber context, which takes the
 			*** name of the parameter as a parameter
@@ -62,7 +62,7 @@ func UserController(app *fiber.App) {//receiving the fiber object passed as app
 			passwordQueryParam := c.Params("password")
 
 			/** 3. Retrieving data from the body in the request
-			*** Suppose our endpoint is "user/signIn",
+			*** Suppose our endpoint is "{{BASE_API_URL}}/user/signIn",
 			*** we retrieve the body of the request; from which
 			*** we can access the individual data in the request's body
 			**/
@@ -92,7 +92,7 @@ func UserController(app *fiber.App) {//receiving the fiber object passed as app
 			})
 		})
 
-	//handle sign-up operations here. Uses the Post HTTP method
+	//handle sign-up operations here. Uses the POST HTTP method
 	app.Post(config.GetAPIBase()+"user/signUp", func(c *fiber.Ctx) error {
 		//return a response to the client in JSON format
 		return c.JSON(&fiber.Map{
@@ -102,7 +102,7 @@ func UserController(app *fiber.App) {//receiving the fiber object passed as app
 		})
 	})
 
-	//handle fetch-users operations here. Uses the Get HTTP method
+	//handle fetch-users operations here. Uses the GET HTTP method
 	app.Get(config.GetAPIBase()+"user/fetchAll", func(c *fiber.Ctx) error {
 		//return a response to the client in JSON format
 		return c.JSON(&fiber.Map{

@@ -12,13 +12,15 @@ package router
 import (
 	controllers "github.com/PolarSoft-Technologies/Go-JJC/src/controllers"
 	"github.com/gofiber/fiber/v2"
+	"github.com/jinzhu/gorm"
 )
 
 // SetupRoutes func
-func SetupRoutes(app *fiber.App) { /** We are receiving the Fiber app from main.go file as a param **/
+func SetupRoutes(app *fiber.App, db *gorm.DB) { /** We are receiving the Fiber app from main.go file as a param **/
 
 	/** Setup all controller routes in this project here
+	*** check the onlyrouting module for more on this!
 	**/
-	controllers.UserController(app)
+	controllers.UserController(app,db)
 
 }

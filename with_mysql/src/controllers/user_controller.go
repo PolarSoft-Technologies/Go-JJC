@@ -13,83 +13,97 @@ package controllers //declare package name here
 
 import (
 	"github.com/PolarSoft-Technologies/Go-JJC/src/config"
+	"github.com/PolarSoft-Technologies/Go-JJC/src/validations"
 	"github.com/gofiber/fiber/v2"
-)
-
-/** create a struct model for holding the data in the body of the request.
-*** this is helpful when you need to keep track of what's needed
-*** by this endpoint. Otherwise you could blindly retrieve the data
-*** in the body of the request using an interface instead.
-*** Field names should start with an uppercase letter
-**/
-type BodyData struct {
-	Email    string `json:"email" xml:"email" form:"email"`
-	Password string `json:"password" xml:"password" form:"password"`
-}
+	"github.com/jinzhu/gorm"
+	"golang.org/x/crypto/bcrypt"
+	"encoding/json")
 
 //UserController for user related operations
-func UserController(app *fiber.App) {//receiving the fiber object passed as app
+func UserController(app *fiber.App, db *gorm.DB) { //receiving the fiber object passed as app and the db instance
 
-	//handle sign-in operations here. Uses the Post HTTP method
-	app.Post(config.GetAPIBase()+"user/signIn",
+	/* NOTE: For the purpose of this tutorial, I'll be retrieving data sent
+	*** by the client as query parameters. If you wish to use
+	*** the body of the request or any other means, kindly review
+	*** the users_controller.go file in the 'onlyrouting' module
+	*** which explains how to retrieve
+	*** data sent by the client in different ways.
+	*** correct users in the users table in the database are:
+	*** 1. Email: test@test.com, Password: 111111
+	*** 2. Email: test1@test1.com, Password: 111111
+	**/
+
+	//handle sign-in operations here. Uses the GET HTTP method
+	app.Get(config.GetAPIBase()+"user/signIn",
 		func(c *fiber.Ctx) error {
-			/** The Fiber context c contains the HTTP request and response.
-			*** It has methods for the request query string, parameters, body,
-			*** HTTP headers, and so on. You can read up more at
-			*** https://docs.gofiber.io/
-			*** some examples are illustrated below
+
+			/* Here, our endpoint on the client side would be like this
+			*** "{{BASE_API_URL}}/user/signIn?email=test@test.com&password=111111";
 			**/
 
-			/** 1. Retrieving a query string value in the request
-			*** Suppose our endpoint on the client side is
-			*** "user/signIn?email=test@test.com&password=123456";
-			*** we retrieve the query string values of email and password
-			*** from the Query function of the Fiber context, which takes the
-			*** name of the query string as a parameter
-			**/
-			emailQueryString := c.Query("email")
-			passwordQueryString := c.Query("password")
+			//retrieving email & password from the client
+			userEmail := c.Query("email")
+			userPassword := c.Query("password")
 
-			/** 2. Retrieving a parameter value in the request
-			*** Suppose our endpoint is "user/signIn/:email/:password",
-			*** i.e on the client side we have
-			*** "user/signIn/test@test.com/123456";
-			*** we retrieve the parameters, email and password, from
-			*** the Params function of the Fiber context, which takes the
-			*** name of the parameter as a parameter
-			**/
-			emailQueryParam := c.Params("email")
-			passwordQueryParam := c.Params("password")
+			//create a variable of type validations.User to hold fields 
+			//from the client and result of our db query
+			user := validations.User{Email: userEmail, Password: userPassword}
 
-			/** 3. Retrieving data from the body in the request
-			*** Suppose our endpoint is "user/signIn",
-			*** we retrieve the body of the request; from which
-			*** we can access the individual data in the request's body
-			**/
+			//sanitize the fields gotten from the client
+			user.Prepare()
 
-			//create a new instance of the BodyData struct as bodyData
-			bodyData := new(BodyData)
-			//populate bodyData with the data in the body of the request.
-			if err := c.BodyParser(bodyData); err != nil {
-				return err
+			//we check if any required field(s) value is/are missing and
+			//that fields are valid
+			err := user.IsValid("signin")
+
+			//throw error if there's any invalid field value(s)
+			if err != nil {
+				return config.RESPONSE(c, 500, false,
+					err.Error(), nil)
 			}
 
-			//create a variable holding all response in this endpoint
-			result := map[string]string{
-				"emailQueryString":    emailQueryString,
-				"passwordQueryString": passwordQueryString,
-				"emailQueryParam":     emailQueryParam,
-				"passwordQueryParam":  passwordQueryParam,
-				"reqBodyEmail":        bodyData.Email,
-				"reqBodyPassword":     bodyData.Password,
+			/*check if user with the supplied email exists and populate the result
+			*** of the query into the user variable created above
+			**/
+			res := db.Find(&user, "email = ?", userEmail)
+			//more queries can be found here https://gorm.io/docs/query.html
+
+			if res.Error != nil { //user does not exist
+				return config.RESPONSE(c, 500, false,
+					config.MatchFailed, nil)
 			}
 
-			//return a response to the client in JSON format
-			return c.JSON(&fiber.Map{
-				"success": true,
-				"message": "Signed In Successfully",
-				"data":    result,
-			})
+			//validate password and return error if it is not correct
+			err = config.VerifyPassword(user.Password, userPassword)
+			if err != nil && err == bcrypt.ErrMismatchedHashAndPassword {
+				return config.RESPONSE(c, 500, false,
+					config.MatchFailed, nil)
+			}
+
+			//generate JWT token if the password is correct
+			token, _ := config.CreateToken(user.ID)
+			/* In production you need to handle error(s) thrown by the 
+			*** second parameter, _. i.e change _ to err and handle
+			*** the error thrown. do so everywhere it occurs in 
+			*** order to have a production grade code
+			*** refer to the introduction module if you do not understand what
+			*** the underscore _ is used for.
+			**/
+
+			user.Token = token
+
+			/*remove the password value from the response to be returned 
+			** to the client
+			*/
+			user.Password = ""
+
+			u,_ := json.Marshal(user)
+
+			s := string(u) 
+
+			//signin successful
+			return config.RESPONSE(c, 200, true, config.SignInSuccess, &s)
+
 		})
 
 	//handle sign-up operations here. Uses the Post HTTP method
